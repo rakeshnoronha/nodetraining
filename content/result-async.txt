@@ -1,0 +1,1 @@
+Here is the result in asynch write method: first txt file, second text file
