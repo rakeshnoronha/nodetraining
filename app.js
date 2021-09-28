@@ -1,6 +1,14 @@
-const _ = require("lodash");
+const fs = require("fs");
+const http = require("http");
 
-const items = [1, [2, [3, 4, [5]]]];
-
-const newItems = _.flattenDeep(items);
-console.log(newItems);
+http
+  .createServer((req, res) => {
+    const filestream = fs.createReadStream("./content/big.txt", "utf-8");
+    filestream.on("open", () => {
+      filestream.pipe(res);
+    });
+    filestream.on("error", (err) => {
+      console.log(err);
+    });
+  })
+  .listen(5000);
